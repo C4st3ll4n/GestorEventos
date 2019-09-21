@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de evento</title>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+<body class="mdc-typography">
+<header class="mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon--unbounded">
+                menu
+            </button>
+            <span class="mdc-top-app-bar__title">Cadastrar eventos</span></section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Download"
+            >file_download
+            </button>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded"
+                    aria-label="Print this page">print
+            </button>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded"
+                    aria-label="Bookmark this page">bookmark
+            </button>
+        </section>
+    </div>
+</header>
+<br><br><br>
+
+
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    <a href="/eventos" class="mdc-fab mdc-fab--extended" aria-label="Eventos">
+                        <span class="mdc-fab__icon material-icons">search</span>
+                        <span class="mdc-fab__label">Eventos</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <br>
+                <form method="post">
+                    <label>Nome:
+                        <input class="text-input" type="text" value="" name="nome" placeholder="Congresso de XGH">
+                    </label>
+                    Local:<input type="text" value="" name="local" placeholder="Auditório">
+                    Data:<input type="date" value="" name="data" placeholder="12/12/12">
+                    Horario:<input type="time" value="" name="horario" placeholder="08:30">
+                    <button class="foo-button mdc-button" type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--BORN TO RAISE HELL-->
+    <div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

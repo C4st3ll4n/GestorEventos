@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <meta charset="UTF-8">
+    <title>Eventos disponíveis</title>
+</head>
+<body>
+<header class="mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon--unbounded">
+                menu
+            </button>
+            <span class="mdc-top-app-bar__title">Listagem de eventos</span></section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Download"
+            >file_download
+            </button>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded"
+                    aria-label="Print this page">print
+            </button>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded"
+                    aria-label="Bookmark this page">bookmark
+            </button>
+        </section>
+    </div>
+</header>
+
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    <br><br><br>
+                    <div th:each="evento: ${evento}">
+                        <p>Nome: <span th:text="${evento.nome}"></span></p>
+                        <p>Local: <span th:text="${evento.local}"></span></p>
+                        <p>Data: <span th:text="${evento.data}"></span></p>
+                        <p>Horário: <span th:text="${evento.horario}"></span></p>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell">
+                        <form method="post">
+                            <label>Nome:
+                                <input class="text-input" type="text" value="" name="nomeParticipante"
+                                       placeholder="Fulaho de tal">
+                            </label>
+
+                            Local:<label>
+                            <input type="text" value="" name="RG" placeholder="00000000">
+                        </label>
+
+                            <button class="foo-button mdc-button" type="submit">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--qSZ4_E-xIzgGWpQhdeQlTovdqXgrW02jChowN1hu2pc-->
+    <div>
+
+    </div>
+</div>
+</body>
+</html>
