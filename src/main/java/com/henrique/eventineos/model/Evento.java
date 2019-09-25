@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,9 +22,16 @@ public class Evento implements Serializable {
     @GeneratedValue(strategy = AUTO)
     private Long id;
 
+    @NotEmpty
     private String nome;
+
+    @NotEmpty
     private String local;
+
+    @NotEmpty
     private String data;
+
+    @NotEmpty
     private String horario;
 
     @OneToMany
