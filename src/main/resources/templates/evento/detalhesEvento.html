@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+<div th:replace="includes/head :: head"></div>
+<link rel="stylesheet" href="style/style.css">
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <meta charset="UTF-8">
-    <title>EventoSpg</title>
-</head>
 <body>
 <div th:replace="includes/header :: header"></div>
 
+<div class="container">
 
-<div class="clipped-container">
+    <div th:each="evento: ${evento}">
+        <p>Nome: <span th:text="${evento.nome}"></span></p>
+        <p>Local: <span th:text="${evento.local}"></span></p>
+        <p>Data: <span th:text="${evento.data}"></span></p>
+        <p>Horário: <span th:text="${evento.horario}"></span></p>
+    </div>
 
-                <div th:each="evento: ${evento}">
-                    <p>Nome: <span th:text="${evento.nome}"></span></p>
-                    <p>Local: <span th:text="${evento.local}"></span></p>
-                    <p>Data: <span th:text="${evento.data}"></span></p>
-                    <p>Horário: <span th:text="${evento.horario}"></span></p>
-                </div>
-            </div>
+    <th:block th:include="mensagemValidacao"></th:block>
 
-                    <th:block th:include="mensagemValidacao"></th:block>
+    <form method="post">
+        <label>Nome:
+            <input class="text-input" type="text" value="" name="nomeParticipante"
+                   placeholder="Fulaho de tal">
+        </label>
 
-                    <form method="post">
-                        <label>Nome:
-                            <input class="text-input" type="text" value="" name="nomeParticipante"
-                                   placeholder="Fulaho de tal">
-                        </label>
+        <label>rg:
+        <input type="text" value="" name="rg" placeholder="00000000">
+    </label>
 
-                        RG:<label>
-                        <input type="text" value="" name="RG" placeholder="00000000">
-                    </label>
+        <button class="foo-button mdc-button" type="submit">Salvar</button>
+    </form>
 
-                        <button class="foo-button mdc-button" type="submit">Salvar</button>
-                    </form>
+    <h5>Lista de participantes</h5>
+    <table class="container">
+        <thead>
+        <tr>
+            <th role="columnheader" scope="col">Nome</th>
+            <th role="columnheader" scope="col">rg</th>
+            <th role="columnheader" scope="col">Deletar</th>
+        </tr>
+        </thead>
+        <tbody class="">
+        <tr th:each="participante: ${participantes}">
+            <td><span th:text="${participante.nomeParticipante}"></span></td>
+            <td><span th:text="${participante.rg}"></span></td>
+            <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('EC#deletarParticipante')
+            .arg(0,participante.rg)).build()}">
+                <i class="material-icons">delete</i></a></td>
+        </tr>
+        </tbody>
 
-                <br><br><br>
-                <h5>Lista de participantes</h5>
-                <div th:each="participante: ${participantes}">
-                    <p><span th:text="${participante.nomeParticipante}"></span>
-                        <span th:text="${participante.RG}"></span></p>
-                </div>
+    </table>
+    <!--qSZ4_E-xIzgGWpQhdeQlTovdqXgrW02jChowN1hu2pc-->
+    <br>
+    <br>
+    <br>
 
-<a href="/eventos" class="mdc-fab mdc-fab--extended" aria-label="Eventos">
-    <span class="mdc-fab__icon material-icons">search</span>
-    <span class="mdc-fab__label">Eventos</span>
-</a>
-<!--qSZ4_E-xIzgGWpQhdeQlTovdqXgrW02jChowN1hu2pc-->
+</div>
+<div th:replace="includes/footer :: footer"></div>
+
 </body>
 </html>

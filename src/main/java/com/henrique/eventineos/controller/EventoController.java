@@ -14,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -29,36 +32,33 @@ public class EventoController {
     private ParticipanteRepository participanteRepository;
 
     @RequestMapping(value = "/cadastrarEvento", method = GET)
-    public String form()
-    {
+    public String form() {
         return "evento/formEvento";
     }
 
     @RequestMapping(value = "/cadastrarEvento", method = POST)
-    public String form(@Valid Evento evento, BindingResult bindingResult, RedirectAttributes attributes)
-    {
-        if (bindingResult.hasErrors()){
-            attributes.addFlashAttribute("mensagem","Verifique os campos!");
+    public String form(@Valid Evento evento, BindingResult bindingResult, RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
 
-        }else {
-             eventoRepository.save(evento);
-            attributes.addFlashAttribute("mensagem","Cadastrado com sucesso.");
+        } else {
+            eventoRepository.save(evento);
+            attributes.addFlashAttribute("mensagem", "Cadastrado com sucesso.");
 
         }
         return "redirect:/cadastrarEvento";
     }
 
     @RequestMapping("/eventos")
-    public ModelAndView listagemEventos()
-    {
+    public ModelAndView listagemEventos() {
         ModelAndView mav = new ModelAndView("index");
         List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
         mav.addObject("eventos", eventos);
         return mav;
     }
 
-    @RequestMapping(value="/{codigo}", method = GET)
-    public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo){
+    @RequestMapping(value = "/{codigo}", method = GET)
+    public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo) {
         Evento event = eventoRepository.findById(codigo);
 
         ModelAndView mav = new ModelAndView("evento/detalhesEvento");
@@ -69,21 +69,44 @@ public class EventoController {
         return mav;
     }
 
-    @RequestMapping(value="/{codigo}", method = POST)
+    @RequestMapping(value = "/{codigo}", method = POST)
     public String detalharEvento(@PathVariable("codigo") long codigo, @Valid Participante participante,
-                                 BindingResult bindingResult, RedirectAttributes attributes){
+                                 BindingResult bindingResult, RedirectAttributes attributes) {
 
-        if (bindingResult.hasErrors()){
-            attributes.addFlashAttribute("mensagem","Verifique os campos!");
+        if (bindingResult.hasErrors()) {
 
-        }else{
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!\n"+
+                    bindingResult.getAllErrors().toString());
 
-        Evento event = eventoRepository.findById(codigo);
-        participante.setEvento(event);
-        participanteRepository.save(participante);
-            attributes.addFlashAttribute("mensagem","Adicionado com sucesso");
+        } else {
+
+            Evento event = eventoRepository.findById(codigo);
+            participante.setEvento(event);
+            participanteRepository.save(participante);
+            attributes.addFlashAttribute("mensagem", "Adicionado com sucesso");
 
         }
         return "redirect:/{codigo}";
+    }
+
+    @RequestMapping("/deletarEvento")
+    public String deletarEvento(long codigo){
+
+        Evento evento = eventoRepository.findById(codigo);
+        eventoRepository.delete(evento);
+
+        return "redirect:/eventos";
+    }
+    @RequestMapping("/deletarParticipante")
+    public String deletarParticipante(String rg){
+
+        Participante participante = participanteRepository.findByRg(rg);
+        participanteRepository.delete(participante);
+
+        Evento evento = participante.getEvento();
+
+        long codigoL = evento.getId();
+        String codigo = String.valueOf(codigoL);
+        return "redirect:/"+codigo;
     }
 }

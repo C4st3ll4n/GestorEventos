@@ -9,21 +9,13 @@ import javax.validation.constraints.NotEmpty;
 public class Participante {
     @Id
     @NotEmpty
-    private String RG;
+    private String rg;
 
     @NotEmpty
     private String nomeParticipante;
 
     @ManyToOne
     private Evento evento;
-
-    public String getRG() {
-        return RG;
-    }
-
-    public void setRG(String RG) {
-        this.RG = RG;
-    }
 
     public String getNomeParticipante() {
         return nomeParticipante;
@@ -39,5 +31,13 @@ public class Participante {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 }
