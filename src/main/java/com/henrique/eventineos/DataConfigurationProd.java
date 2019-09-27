@@ -12,16 +12,16 @@ import javax.sql.DataSource;
 
 
 @Configuration
-public class DataConfiguration {
+public class DataConfigurationProd {
 
-    @Profile("dev")
+    @Profile("prod")
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/eventineos");
-        dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setUrl("jdbc:mysql://g5xq0etbbo0i9sqx:cmgv1y9kcj2rf4th@s9xpbd61ok2i7drv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/quyzobj2ull6ovod");
+        dataSource.setUsername("g5xq0etbbo0i9sqx");
+        dataSource.setPassword("cmgv1y9kcj2rf4th");
         return dataSource;
     }
 
